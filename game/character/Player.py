@@ -44,13 +44,13 @@ class Player(Sprite):
         
     def keyDown(self, key):
         if key == self.control_left:
-            self.move_x -= self.move_x
+            self.move_x = self.move_x - 4
         elif key == self.control_right:
-            self.move_x += self.move_x
+            self.move_x = self.move_x + 4
         elif key == self.control_up:
-            self.move_y += self.move_y
+            self.move_y = self.move_y - 4
         elif key == self.control_down:
-            self.move_y -= self.move_y
+            self.move_y = self.move_y + 4
     
     def keyUp(self, key):
         if key == self.control_left:

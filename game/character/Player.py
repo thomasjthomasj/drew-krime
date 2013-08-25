@@ -26,10 +26,10 @@ class Player(Sprite):
     level_sneak = 1
     
     def __init__(self):
-        super(Player, self).__init__("sprites/test.png")
+        super(Player, self).__init__("sprites/test.png", [300, 200])
         Game.addSprite("player", self)
     
-    def draw(self):
+    def draw(self, screen):
         # Temporary true if statement
         if True:
             # If statements to allow for map movement in the future

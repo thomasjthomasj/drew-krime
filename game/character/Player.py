@@ -2,7 +2,7 @@ import pygame, math, random
 
 # Import classes
 from game.visuals.Sprite import Sprite
-from game import Game
+from game.Game import Game
 
 class Player(Sprite):
     
@@ -42,7 +42,7 @@ class Player(Sprite):
         
         screen.blit(self.image, self.rect)
         
-    def keyDownListener(self, key):
+    def keyDown(self, key):
         if key == self.control_left:
             self.move_x -= self.move_x
         elif key == self.control_right:
@@ -52,7 +52,7 @@ class Player(Sprite):
         elif key == self.control_down:
             self.move_y -= self.move_y
     
-    def keyUpListener(self, key):
+    def keyUp(self, key):
         if key == self.control_left:
             self.move_x = 0
         elif key == self.control_right:

@@ -28,7 +28,7 @@ screen.convert()
 # Run game
 Game.addSpriteGroup("player")
 
-player = Player
+player = Player()
 
 pygame.mouse.set_visible(False)
 

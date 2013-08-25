@@ -40,7 +40,7 @@ class Player(Sprite):
             
         self.pos[1] += self.move_y
         
-        screen.blit(self.image, self.rect)
+        screen.blit(self.image, self.pos)
         
     def keyDown(self, key):
         if key == self.control_left:

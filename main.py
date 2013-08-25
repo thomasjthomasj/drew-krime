@@ -43,7 +43,10 @@ while inLoop:
             inLoop = False
             
         elif event.type == pygame.KEYDOWN:
-            player.keyDown(event.key)
+            if event.key == pygame.K_ESCAPE:
+                inLoop = False
+            else:
+                player.keyDown(event.key)
             
         elif event.type == pygame.KEYUP:
             player.keyUp(event.key)

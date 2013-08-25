@@ -32,6 +32,8 @@ class Player(Sprite):
     def draw(self, screen):
         # Temporary true if statement
         if True:
+            self.applyPhysics()
+            
             # If statements to allow for map movement in the future
             if self.move_x < 0:
                 self.pos[0] += self.move_x
@@ -44,13 +46,13 @@ class Player(Sprite):
         
     def keyDown(self, key):
         if key == self.control_left:
-            self.move_x = self.move_x - 4
+            self.move_x = self.move_x - 2
         elif key == self.control_right:
-            self.move_x = self.move_x + 4
+            self.move_x = self.move_x + 2
         elif key == self.control_up:
-            self.move_y = self.move_y - 4
+            self.move_y = self.move_y - 2
         elif key == self.control_down:
-            self.move_y = self.move_y + 4
+            self.move_y = self.move_y + 2
     
     def keyUp(self, key):
         if key == self.control_left:
@@ -61,6 +63,12 @@ class Player(Sprite):
             self.move_y = 0
         elif key == self.control_down:
             self.move_y = 0
+            
+    def applyPhysics(self):
+        if self.move_y < Game.gravity:
+            self.move_y = self.move_y + Game.gravity_offset
+        elif self.move_y > Game.gravity:
+            self.move_y = Game.gravity
     
     
     

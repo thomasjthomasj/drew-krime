@@ -3,7 +3,9 @@
 project_title = "Drew Krime: Streets of Ellay"
 
 # Import dependencies
-import pygame, sys, os
+import os, sys
+import pygame
+from pygame.locals import *
 
 # Check if Windows and import pygame._view if so
 from sys import platform as _platform

@@ -18,6 +18,9 @@ class Player(Sprite):
     move_x = 0
     move_y = 0
     vel_y = 0
+    walk_speed = 4
+    sneak_speed = 2
+    move_speed = walk_speed
     
     # Level
     level_gun = 1
@@ -47,11 +50,14 @@ class Player(Sprite):
         screen.blit(self.image, self.pos)
         
     def keyDown(self, key):
+        if key == self.control_sneak:
+            self.move_speed = self.sneak_speed
+        
         if key == self.control_left:
-            self.move_x = self.move_x - 2
+            self.move_x = self.move_x - self.move_speed
         elif key == self.control_right:
-            self.move_x = self.move_x + 2
-        elif key == self.control_up and self.pos[1]>= 300:
+            self.move_x = self.move_x + self.move_speed
+        elif key == self.control_jump and self.pos[1]>= 300:
             self.vel_y = 0 - self.level_jump
             if self.level_jump < 2:
                 self.level_jump+=.05
@@ -62,6 +68,8 @@ class Player(Sprite):
             self.move_x = 0
         elif key == self.control_right:
             self.move_x = 0
+        elif key == self.control_sneak:
+            self.move_speed = self.walk_speed
             
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y

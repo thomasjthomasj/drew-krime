@@ -39,11 +39,17 @@ class Player(Sprite):
         if True:
             self.applyPhysics()
             
-            # If statements to allow for map movement in the future
-            if self.move_x < 0:
-                self.pos[0] += self.move_x
-            elif self.move_x > 0:
-                self.pos[0] += self.move_x
+            if self.sneak:
+                if self.move_x < 0:
+                    self.pos[0] -= self.sneak_speed
+                elif self.move_x > 0:
+                    self.pos[0] += self.sneak_speed
+            else:
+                # If statements to allow for map movement in the future
+                if self.move_x < 0:
+                    self.pos[0] += self.move_x
+                elif self.move_x > 0:
+                    self.pos[0] += self.move_x
             
         self.pos[1] += self.move_y
         screen.fill((0,0,0))
@@ -54,15 +60,9 @@ class Player(Sprite):
             self.sneak = True
         
         if key == self.control_left:
-            if self.sneak:
-                self.moveLeft(self.sneak_speed)
-            else:
-                self.moveLeft(self.walk_speed)
+            self.moveLeft(self.walk_speed)
         elif key == self.control_right:
-            if self.sneak:
-                self.moveRight(self.sneak_speed)
-            else:
-                self.moveRight(self.walk_speed)
+            self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
             self.vel_y = 0 - self.level_jump
             if self.level_jump < 2:

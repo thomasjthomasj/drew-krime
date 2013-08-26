@@ -30,13 +30,16 @@ class Player(Sprite):
     level_sneak = 1
     level_jump = 1
     
+    # Misc
+    draw = True
+    
     def __init__(self):
         super(Player, self).__init__("sprites/test.png", [300, 200])
         Game.addSprite("player", self)
     
     def draw(self, screen):
         # Temporary true if statement
-        if True:
+        if self.draw:
             self.applyPhysics()
             
             if self.sneak:

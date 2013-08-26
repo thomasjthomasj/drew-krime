@@ -34,7 +34,7 @@ class Player(Sprite):
     draw = True
     
     def __init__(self):
-        super(Player, self).__init__("sprites/test.png", [300, 200])
+        super(Player, self).__init__("test.png", [300, 200])
         Game.addSprite("player", self)
     
     def draw(self, screen):

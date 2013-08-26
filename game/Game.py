@@ -7,7 +7,7 @@ class Game:
     fps = 60
     frame = 1
     
-    gravity = 2
+    gravity = .2
     gravity_offset = 0.02
     
     def __init__(self):

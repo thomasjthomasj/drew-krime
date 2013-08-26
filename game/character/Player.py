@@ -17,6 +17,7 @@ class Player(Sprite):
     # Movement
     move_x = 0
     move_y = 0
+    vel_y = 0
     
     # Level
     level_gun = 1
@@ -24,6 +25,7 @@ class Player(Sprite):
     level_talk = 1
     level_ath = 1
     level_sneak = 1
+    level_jump = 1
     
     def __init__(self):
         super(Player, self).__init__("sprites/test.png", [300, 200])
@@ -41,7 +43,7 @@ class Player(Sprite):
                 self.pos[0] += self.move_x
             
         self.pos[1] += self.move_y
-        
+        screen.fill((0,0,0))
         screen.blit(self.image, self.pos)
         
     def keyDown(self, key):
@@ -49,26 +51,26 @@ class Player(Sprite):
             self.move_x = self.move_x - 2
         elif key == self.control_right:
             self.move_x = self.move_x + 2
-        elif key == self.control_up:
-            self.move_y = self.move_y - 2
-        elif key == self.control_down:
-            self.move_y = self.move_y + 2
+        elif key == self.control_up and self.pos[1]>= 300:
+            self.vel_y = 0 - self.level_jump
+            if self.level_jump < 2:
+                self.level_jump+=.05
+
     
     def keyUp(self, key):
         if key == self.control_left:
             self.move_x = 0
         elif key == self.control_right:
             self.move_x = 0
-        elif key == self.control_up:
-            self.move_y = 0
-        elif key == self.control_down:
-            self.move_y = 0
             
     def applyPhysics(self):
-        if self.move_y < Game.gravity:
-            self.move_y = self.move_y + Game.gravity_offset
-        elif self.move_y > Game.gravity:
-            self.move_y = Game.gravity
+        self.move_y = self.move_y + self.vel_y
+        self.vel_y += Game.gravity
+        if self.pos[1] > 300 and self.vel_y > 0:
+            self.vel_y = 0
+            self.move_y = 0
+            self.pos[1] = 300
+
     
     
     

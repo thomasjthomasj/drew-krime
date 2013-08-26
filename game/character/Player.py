@@ -20,7 +20,7 @@ class Player(Sprite):
     vel_y = 0
     walk_speed = 4
     sneak_speed = 2
-    move_speed = walk_speed
+    sneak = False
     
     # Level
     level_gun = 1
@@ -51,12 +51,18 @@ class Player(Sprite):
         
     def keyDown(self, key):
         if key == self.control_sneak:
-            self.move_speed = self.sneak_speed
+            self.sneak = True
         
         if key == self.control_left:
-            self.move_x = self.move_x - self.move_speed
+            if self.sneak:
+                self.moveLeft(self.sneak_speed)
+            else:
+                self.moveLeft(self.walk_speed)
         elif key == self.control_right:
-            self.move_x = self.move_x + self.move_speed
+            if self.sneak:
+                self.moveRight(self.sneak_speed)
+            else:
+                self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
             self.vel_y = 0 - self.level_jump
             if self.level_jump < 2:
@@ -69,7 +75,13 @@ class Player(Sprite):
         elif key == self.control_right:
             self.move_x = 0
         elif key == self.control_sneak:
-            self.move_speed = self.walk_speed
+            self.sneak = False
+            
+    def moveLeft(self, speed):
+        self.move_x = self.move_x - speed
+    
+    def moveRight(self, speed):
+        self.move_x = self.move_x + speed
             
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y

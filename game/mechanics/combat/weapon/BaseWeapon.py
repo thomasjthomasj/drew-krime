@@ -1,7 +1,10 @@
 import pygame
-from game.visuals.Sprite import Sprite
+from game.mechanics.combat.weapon.bullet import BaseBullet
 
-class BaseWeapon(Sprite):
+class BaseWeapon():
+    
+    bullet = False
 
-    def __init__(self):
-        super(BaseWeapon, self).__init__()
+    def __init__(self, pos):
+        '''takes parameter of where weapon is located ie player location'''
+        bullet = BaseBullet(pos)

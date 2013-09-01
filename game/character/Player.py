@@ -3,6 +3,7 @@ import pygame, math, random
 # Import classes
 from game.visuals.Sprite import Sprite
 from game.Game import Game
+from game.mechanics.Leveller import Leveller
 
 class Player(Sprite):
     
@@ -27,8 +28,14 @@ class Player(Sprite):
     level_melee = 1
     level_talk = 1
     level_ath = 1
+    
     level_sneak = 1
+    sneak_level_up = 0
+    
     level_jump = 1
+    level_jump_cap = 5
+    jump_level_up = 0
+    jump_level_up_cap = 5
     
     # Misc
     draw = True
@@ -68,8 +75,9 @@ class Player(Sprite):
             self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
             self.vel_y = 0 - self.level_jump
-            if self.level_jump < 2:
-                self.level_jump+=.05
+            Leveller.levelUpJump(self)
+            #if self.level_jump < 2:
+            #    self.level_jump+=.05
 
     
     def keyUp(self, key):

@@ -34,5 +34,4 @@ class Game:
             
         for group in Game.sprites:
             for sprite in Game.sprites[group].sprites():
-                print(sprite)
                 sprite.draw(screen)

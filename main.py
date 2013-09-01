@@ -20,7 +20,7 @@ from game.character.Player import Player
 from game.mechanics.Crosshair import Crosshair
 
 # Setup screen
-size = [600, 400]
+size = Game.getDefaultDimensions()
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption(project_title)
 

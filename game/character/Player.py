@@ -40,21 +40,24 @@ class Player(Sprite):
     sneak_level_up = 0
     
     level_jump = 1
-    level_jump_cap = 2
+    level_jump_cap = 3
     jump_level_up = 0
     jump_level_up_cap = 5
     
     # Misc
-    draw = True
+    render = True
+    ground_level = 700
     
     def __init__(self):
         super(Player, self).__init__("test.png", [300, 200])
         self.weapon = BaseWeapon(self.pos)
+        dimensions = Game.getDefaultDimensions()
+        self.ground_level = dimensions[1] - 100
         Game.addSprite("player", self)
     
     def draw(self, screen):
         # Temporary true if statement
-        if self.draw:
+        if self.render:
             self.applyPhysics()
             
             if self.sneak:
@@ -111,7 +114,7 @@ class Player(Sprite):
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y
         self.vel_y += Game.gravity
-        if self.pos[1] > 300 and self.vel_y > 0:
+        if self.pos[1] > self.ground_level and self.vel_y > 0:
             self.vel_y = 0
             self.move_y = 0
-            self.pos[1] = 300
+            self.pos[1] = self.ground_level

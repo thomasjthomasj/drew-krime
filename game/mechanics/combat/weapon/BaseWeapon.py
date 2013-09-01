@@ -9,14 +9,13 @@ class BaseWeapon():
     pos = (0, 0)
 
     def __init__(self, pos):
-        '''takes parameter of where weapon is located ie player location'''
         self.pos = pos
     
     def fire(self):
         mousePos = pygame.mouse.get_pos()
         bullet = BaseBullet(self.pos)
         bullet.move(mousePos, self.speed)
-        Game.addSprite('bullets', bullet)
+        Game.addSprite("bullets", bullet)
     
     def ceaseFire(self):
         return

@@ -3,7 +3,7 @@ from game.visuals.Sprite import Sprite
 
 class BaseBullet(Sprite):
     
-    draw = False
+    render = False
     move_x = 0
     move_y = 0
     
@@ -11,17 +11,15 @@ class BaseBullet(Sprite):
         super(BaseBullet, self).__init__('bullet.png', pos)
         
     def draw(self, screen):
-        if self.draw:
+        if self.render:
+            return
             self.pos[0] += self.move_x
             self.pos[1] += self.move_y
-            screen.fill((0,0,0))
+            #screen.fill((0,0,0))
             screen.blit(self.image, self.pos)
-            return True
-        
-        return False
     
     def move(self, newPos, speed):
-        self.draw = True
+        self.render = True
         move_x = speed
         move_y = speed
         if self.pos != newPos:
@@ -33,5 +31,5 @@ class BaseBullet(Sprite):
             self.move_x += move_x
             self.move_y += move_y
         else:
-            self.draw = False
+            self.render = False
         

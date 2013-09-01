@@ -17,6 +17,7 @@ pygame.init()
 # Import game files
 from game.Game import Game
 from game.character.Player import Player
+from game.mechanics.Crosshair import Crosshair
 
 # Setup screen
 size = [600, 400]
@@ -27,8 +28,10 @@ screen.convert()
 
 # Run game
 Game.addSpriteGroup("player")
+Game.addSpriteGroup("bullets")
 
 player = Player()
+crosshair = Crosshair()
 
 pygame.mouse.set_visible(False)
 

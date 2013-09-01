@@ -1,9 +1,9 @@
 import pygame
 from game.mechanics.combat.weapon.bullet.BaseBullet import BaseBullet
+from game.Game import Game
 
 class BaseWeapon():
     
-    bullets = []
     speed = 1
     rate = 0
     pos = (0, 0)
@@ -11,17 +11,12 @@ class BaseWeapon():
     def __init__(self, pos):
         '''takes parameter of where weapon is located ie player location'''
         self.pos = pos
-        
-        for (key, bullet) in enumerate(self.bullets):
-            bulletExists = bullet.draw()
-            if bulletExists == False:
-                self.bullets.remove(key)
     
     def fire(self):
         mousePos = pygame.mouse.get_pos()
         bullet = BaseBullet(self.pos)
         bullet.move(mousePos, self.speed)
-        self.bullets.append(bullet)
+        Game.addSprite('bullets', bullet)
     
     def ceaseFire(self):
         return

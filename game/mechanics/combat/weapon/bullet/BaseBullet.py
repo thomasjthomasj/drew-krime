@@ -10,7 +10,7 @@ class BaseBullet(Sprite):
     def __init__(self, pos):
         super(BaseBullet, self).__init__('bullet.png', pos)
         
-    def draw(self):
+    def draw(self, screen):
         if self.draw:
             self.pos[0] += self.move_x
             self.pos[1] += self.move_y

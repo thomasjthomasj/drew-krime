@@ -38,9 +38,9 @@ class Player(Sprite):
     sneak_level_up = 0
     
     level_jump = 1
-    level_jump_cap = 5
+    level_jump_cap = 2
     jump_level_up = 0
-    jump_level_up_cap = 2
+    jump_level_up_cap = 5
     
     # Misc
     draw = True

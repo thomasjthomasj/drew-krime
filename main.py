@@ -52,10 +52,10 @@ while inLoop:
             player.keyUp(event.key)
             
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            pass
+            player.mouseDown(event, key)
         
         elif event.type == pygame.MOUSEBUTTONUP:
-            pass
+            player.mouseUp(event.key)
         
         elif event.type == pygame.MOUSEMOTION:
             pass

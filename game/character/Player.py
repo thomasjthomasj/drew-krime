@@ -16,6 +16,8 @@ class Player(Sprite):
     control_down = pygame.K_s
     control_jump = pygame.K_SPACE
     control_sneak = pygame.K_LSHIFT
+    control_fire = 1
+    control_melee = 3
     
     # Movement
     move_x = 0
@@ -47,7 +49,7 @@ class Player(Sprite):
     
     def __init__(self):
         super(Player, self).__init__("test.png", [300, 200])
-        self.weapon = Pistol
+        self.weapon = Pistol(self.pos)
         Game.addSprite("player", self)
     
     def draw(self, screen):
@@ -83,9 +85,6 @@ class Player(Sprite):
             jump_height = self.level_jump / 5
             self.vel_y = 0 - self.level_jump
             Leveller.levelUpJump(self)
-            #if self.level_jump < 2:
-            #    self.level_jump+=.05
-
     
     def keyUp(self, key):
         if key == self.control_left:
@@ -94,6 +93,14 @@ class Player(Sprite):
             self.move_x = 0
         elif key == self.control_sneak:
             self.sneak = False
+    
+    def mouseDown(self, key):
+        if key == self.control_fire:
+            self.weapon.fire()
+
+    def mouseUp(self, key):
+        if key == self.control_fire:
+            self.weapon.ceaseFire()
             
     def moveLeft(self, speed):
         self.move_x = self.move_x - speed

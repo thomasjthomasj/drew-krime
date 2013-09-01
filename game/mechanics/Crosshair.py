@@ -13,5 +13,4 @@ class Crosshair(Sprite):
     def draw(self, screen):
         if self.render:
             self.pos = pygame.mouse.get_pos()
-            #screen.fill((0,0,0))
             screen.blit(self.image, self.pos)

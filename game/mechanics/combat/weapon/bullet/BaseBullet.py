@@ -12,10 +12,8 @@ class BaseBullet(Sprite):
         
     def draw(self, screen):
         if self.render:
-            return
             self.pos[0] += self.move_x
             self.pos[1] += self.move_y
-            #screen.fill((0,0,0))
             screen.blit(self.image, self.pos)
     
     def move(self, newPos, speed):

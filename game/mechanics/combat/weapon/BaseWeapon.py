@@ -2,7 +2,7 @@ import pygame
 from game.mechanics.combat.weapon.bullet.BaseBullet import BaseBullet
 from game.Game import Game
 
-class BaseWeapon():
+class BaseWeapon(object):
     
     speed = 1
     rate = 0

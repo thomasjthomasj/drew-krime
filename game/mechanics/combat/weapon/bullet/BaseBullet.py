@@ -4,11 +4,13 @@ from game.visuals.Sprite import Sprite
 class BaseBullet(Sprite):
     
     render = False
+    original_pos = (0, 0)
     move_x = 0
     move_y = 0
     
     def __init__(self, pos):
         super(BaseBullet, self).__init__('bullet.png', pos)
+        self.original_pos = pos
         
     def draw(self, screen):
         if self.render:

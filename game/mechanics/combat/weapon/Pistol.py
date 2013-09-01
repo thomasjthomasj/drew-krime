@@ -4,7 +4,7 @@ from game.mechanics.combat.weapon.BaseWeapon import BaseWeapon
 
 class Pistol(BaseWeapon):
     
-    speed = 30
+    speed = 10
     
     def __init__(self, pos):
         super(Pistol, self).__init__(pos)

@@ -1,5 +1,6 @@
 import pygame
 from game.visuals.Sprite import Sprite
+from game.helper.Vector import Vector
 
 class BaseBullet(Sprite):
     
@@ -18,18 +19,20 @@ class BaseBullet(Sprite):
             self.pos[1] += self.move_y
             screen.blit(self.image, self.pos)
     
-    def move(self, newPos, speed):
+    def move(self, new_pos, speed):
         self.render = True
         move_x = speed
         move_y = speed
-        if self.pos != newPos:
-            if newPos[0] > newPos[1]:
-                move_y = round(newPos[0] / newPos[1]) * speed
-            elif newPos[0] < newPos[1]:
-                move_x = round(newPos[1] / newPos[0]) * speed
+        diff_x = float(new_pos[0] - self.pos[1])
+        diff_y = float(new_pos[1] - self.pos[1])
+        
+        if self.pos != new_pos:
+            target_vector = Vector.sub(new_pos, self.pos)
+            if Vector.magnitude(target_vector) < 2:
+                return
+            move_vector = [c * speed for c in Vector.normalize(target_vector)]
             
-            self.move_x += move_x
-            self.move_y += move_y
+            move_x, move_y = Vector.add(self.pos, move_vector)
         else:
             self.render = False
         

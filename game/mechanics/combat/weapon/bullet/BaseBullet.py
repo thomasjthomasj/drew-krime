@@ -4,7 +4,8 @@ from game.visuals.Sprite import Sprite
 class BaseBullet(Sprite):
     
     draw = False
-    
+    move_x = 0
+    move_y = 0
     
     def __init__(self, pos):
         super(BaseBullet, self).__init__('bullet.png', pos)
@@ -23,14 +24,14 @@ class BaseBullet(Sprite):
         self.draw = True
         move_x = speed
         move_y = speed
-        while self.pos != newPos:
+        if self.pos != newPos:
             if newPos[0] > newPos[1]:
-                move_y = (newPos[0] / newPos[1]) * speed
+                move_y = round(newPos[0] / newPos[1]) * speed
             elif newPos[0] < newPos[1]:
-                move_x = (newPos[1] / newPos[0]) * speed
+                move_x = round(newPos[1] / newPos[0]) * speed
             
-            self.move_x[0] += move_x
-            self.move_y[1] += move_y
-            
-        self.draw = False
+            self.move_x += move_x
+            self.move_y += move_y
+        else:
+            self.draw = False
         

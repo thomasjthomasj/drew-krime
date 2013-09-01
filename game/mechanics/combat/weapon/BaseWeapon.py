@@ -1,5 +1,5 @@
 import pygame
-from game.mechanics.combat.weapon.bullet import BaseBullet
+from game.mechanics.combat.weapon.bullet.BaseBullet import BaseBullet
 
 class BaseWeapon():
     
@@ -20,7 +20,7 @@ class BaseWeapon():
     def fire(self):
         mousePos = pygame.mouse.get_pos()
         bullet = BaseBullet(self.pos)
-        bullet.move(mousePos, speed)
+        bullet.move(mousePos, self.speed)
         self.bullets.append(bullet)
     
     def ceaseFire(self):

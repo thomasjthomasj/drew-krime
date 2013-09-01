@@ -94,12 +94,12 @@ class Player(Sprite):
         elif key == self.control_sneak:
             self.sneak = False
     
-    def mouseDown(self, key):
-        if key == self.control_fire:
+    def mouseDown(self, button):
+        if button == self.control_fire:
             self.weapon.fire()
 
-    def mouseUp(self, key):
-        if key == self.control_fire:
+    def mouseUp(self, button):
+        if button == self.control_fire:
             self.weapon.ceaseFire()
             
     def moveLeft(self, speed):

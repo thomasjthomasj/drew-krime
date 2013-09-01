@@ -2,6 +2,8 @@ import math
 
 class Vector:
     
+    # some simple vector helper functions, stolen from http://stackoverflow.com/a/4114962/142637
+    
     @staticmethod
     def magnitude(v):
         return math.sqrt(sum(v[i]*v[i] for i in range(len(v))))

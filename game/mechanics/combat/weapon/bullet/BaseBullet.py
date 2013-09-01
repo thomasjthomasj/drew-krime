@@ -27,6 +27,7 @@ class BaseBullet(Sprite):
         diff_y = float(new_pos[1] - self.pos[1])
         
         if self.pos != new_pos:
+            # Stolen from http://stackoverflow.com/questions/16288905/make-a-sprite-move-to-the-mouse-click-position-step-by-step/16294710#16294710
             target_vector = Vector.sub(new_pos, self.pos)
             if Vector.magnitude(target_vector) < 2:
                 return

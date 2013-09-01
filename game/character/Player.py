@@ -4,7 +4,7 @@ import pygame, math, random
 from game.visuals.Sprite import Sprite
 from game.Game import Game
 from game.mechanics.Leveller import Leveller
-from game.mechanics.combat.weapon.Pistol import Pistol
+from game.mechanics.combat.weapon.BaseWeapon import BaseWeapon
 
 
 class Player(Sprite):
@@ -49,7 +49,7 @@ class Player(Sprite):
     
     def __init__(self):
         super(Player, self).__init__("test.png", [300, 200])
-        self.weapon = Pistol(self.pos)
+        self.weapon = BaseWeapon(self.pos)
         Game.addSprite("player", self)
     
     def draw(self, screen):

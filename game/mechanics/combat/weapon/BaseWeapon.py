@@ -12,7 +12,7 @@ class BaseWeapon():
         '''takes parameter of where weapon is located ie player location'''
         self.pos = pos
         
-        for (key, bullet) in enumerate(bullets):
+        for (key, bullet) in enumerate(self.bullets):
             bulletExists = bullet.draw()
             if bulletExists == False:
                 self.bullets.remove(key)

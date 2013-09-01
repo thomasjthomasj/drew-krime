@@ -4,6 +4,8 @@ import pygame, math, random
 from game.visuals.Sprite import Sprite
 from game.Game import Game
 from game.mechanics.Leveller import Leveller
+from game.mechanics.combat.weapon.Pistol import Pistol
+
 
 class Player(Sprite):
     
@@ -22,6 +24,9 @@ class Player(Sprite):
     walk_speed = 4
     sneak_speed = 2
     sneak = False
+    
+    # Combat
+    weapon = False
     
     # Level
     level_gun = 1
@@ -42,6 +47,7 @@ class Player(Sprite):
     
     def __init__(self):
         super(Player, self).__init__("test.png", [300, 200])
+        self.weapon = BaseWeapon
         Game.addSprite("player", self)
     
     def draw(self, screen):
@@ -74,6 +80,7 @@ class Player(Sprite):
         elif key == self.control_right:
             self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
+            jump_height = self.level_jump / 5
             self.vel_y = 0 - self.level_jump
             Leveller.levelUpJump(self)
             #if self.level_jump < 2:
@@ -101,9 +108,3 @@ class Player(Sprite):
             self.vel_y = 0
             self.move_y = 0
             self.pos[1] = 300
-
-    
-    
-    
-    
-    

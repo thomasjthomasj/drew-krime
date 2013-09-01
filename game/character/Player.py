@@ -40,14 +40,14 @@ class Player(Sprite):
     level_jump = 1
     level_jump_cap = 5
     jump_level_up = 0
-    jump_level_up_cap = 5
+    jump_level_up_cap = 2
     
     # Misc
     draw = True
     
     def __init__(self):
         super(Player, self).__init__("test.png", [300, 200])
-        self.weapon = BaseWeapon
+        self.weapon = Pistol
         Game.addSprite("player", self)
     
     def draw(self, screen):

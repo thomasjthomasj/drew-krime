@@ -85,9 +85,7 @@ class Player(Sprite):
         elif key == self.control_right:
             self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
-            jump_height = self.level_jump / 5
-            self.vel_y = 0 - self.level_jump
-            Leveller.levelUpJump(self)
+            self.jump()
     
     def keyUp(self, key):
         if key == self.control_left:
@@ -110,6 +108,10 @@ class Player(Sprite):
     
     def moveRight(self, speed):
         self.move_x = self.move_x + speed
+        
+    def jump(self):
+        self.vel_y = 0 - self.level_jump
+        Leveller.levelUpJump(self)
             
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y

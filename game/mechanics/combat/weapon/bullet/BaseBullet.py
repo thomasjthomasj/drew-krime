@@ -5,35 +5,54 @@ from game.helper.Vector import Vector
 class BaseBullet(Sprite):
     
     render = False
-    original_pos = (0, 0)
     move_x = 0
     move_y = 0
+    target = False
+    speed = 0
+    
+    @property
+    def int_pos(self):
+        return map(int, self.pos)
+    
+    @property
+    def int_target(self):
+        if self.target == False:
+            return
+        return map(int, self.target)
     
     def __init__(self, pos):
         super(BaseBullet, self).__init__('bullet.png', pos)
-        self.original_pos = pos
         
     def draw(self, screen):
         if self.render:
-            self.pos[0] += self.move_x
-            self.pos[1] += self.move_y
+            self.update()
+
+            self.pos[0] = self.move_x
+            self.pos[1] = self.move_y
             screen.blit(self.image, self.pos)
     
-    def move(self, new_pos, speed):
+    def move(self, target, speed):
+        self.target = target
+        self.speed = speed
         self.render = True
-        move_x = speed
-        move_y = speed
-        diff_x = float(new_pos[0] - self.pos[1])
-        diff_y = float(new_pos[1] - self.pos[1])
+    
+    def update(self):
         
-        if self.pos != new_pos:
-            # Stolen from http://stackoverflow.com/questions/16288905/make-a-sprite-move-to-the-mouse-click-position-step-by-step/16294710#16294710
-            target_vector = Vector.sub(new_pos, self.pos)
-            if Vector.magnitude(target_vector) < 2:
-                return
-            move_vector = [c * speed for c in Vector.normalize(target_vector)]
-            
-            move_x, move_y = Vector.add(self.pos, move_vector)
-        else:
+        if self.int_pos == self.int_target:
             self.render = False
+            return
+        
+        # Stolen from http://stackoverflow.com/questions/16288905/make-a-sprite-move-to-the-mouse-click-position-step-by-step/16294710#16294710
+        target_vector = Vector.sub(self.target, self.pos)
+            
+        if Vector.magnitude(target_vector) < self.speed:
+            self.render = False
+            return
+        
+        move_vector = [c * self.speed for c in Vector.normalize(target_vector)]
+            
+        movement = Vector.add(self.pos, move_vector)
+
+        self.move_x = movement[0]
+        self.move_y = movement[1]
         

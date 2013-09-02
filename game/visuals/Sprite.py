@@ -4,6 +4,8 @@ class Sprite(pygame.sprite.Sprite):
     
     sprite_path = 'sprites/'
     
+    direction = False
+    
     def __init__(self, src, pos):
         super(Sprite, self).__init__()
         self.src_image = pygame.image.load(self.sprite_path + src).convert_alpha()

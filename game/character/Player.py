@@ -26,6 +26,7 @@ class Player(Sprite):
     walk_speed = 4
     sneak_speed = 2
     sneak = False
+    direction = False
     
     # Combat
     weapon = False
@@ -39,8 +40,8 @@ class Player(Sprite):
     level_sneak = 1
     sneak_level_up = 0
     
-    level_jump = 1
-    level_jump_cap = 3
+    level_jump = 2
+    level_jump_cap = 2
     jump_level_up = 0
     jump_level_up_cap = 5
     
@@ -49,8 +50,8 @@ class Player(Sprite):
     ground_level = 700
     
     def __init__(self):
-        super(Player, self).__init__("test.png", [300, 200])
-        self.weapon = Pistol(self.pos)
+        super(Player, self).__init__("player.png", [300, 200])
+        self.weapon = Pistol(self)
         dimensions = Game.getDefaultDimensions()
         self.ground_level = dimensions[1] - 100
         Game.addSprite("player", self)
@@ -81,8 +82,14 @@ class Player(Sprite):
             self.sneak = True
         
         if key == self.control_left:
+            if self.direction == 'right':
+                self.image = pygame.transform.flip(self.image, 1, 0)
+            self.direction = 'left'
             self.moveLeft(self.walk_speed)
         elif key == self.control_right:
+            if self.direction == 'left':
+                self.image = pygame.transform.flip(self.image, 1, 0)
+            self.direction = 'right'
             self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
             self.jump()

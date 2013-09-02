@@ -14,6 +14,10 @@ class Game:
         pass
     
     @staticmethod
+    def getDefaultDimensions():
+        return [1000, 700]
+    
+    @staticmethod
     def addSpriteGroup(name):
         Game.sprites[name] = pygame.sprite.Group()
     

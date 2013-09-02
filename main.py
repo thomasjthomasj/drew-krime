@@ -17,9 +17,10 @@ pygame.init()
 # Import game files
 from game.Game import Game
 from game.character.Player import Player
+from game.mechanics.Crosshair import Crosshair
 
 # Setup screen
-size = [600, 400]
+size = Game.getDefaultDimensions()
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption(project_title)
 
@@ -27,8 +28,10 @@ screen.convert()
 
 # Run game
 Game.addSpriteGroup("player")
+Game.addSpriteGroup("bullets")
 
 player = Player()
+crosshair = Crosshair()
 
 pygame.mouse.set_visible(False)
 
@@ -52,10 +55,10 @@ while inLoop:
             player.keyUp(event.key)
             
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            pass
+            player.mouseDown(event.button)
         
         elif event.type == pygame.MOUSEBUTTONUP:
-            pass
+            player.mouseUp(event.button)
         
         elif event.type == pygame.MOUSEMOTION:
             pass

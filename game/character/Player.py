@@ -1,13 +1,13 @@
 import pygame, math, random
 
 # Import classes
-from game.visuals.Sprite import Sprite
+from game.character.Character import Character
 from game.Game import Game
 from game.mechanics.Leveller import Leveller
 from game.mechanics.combat.weapon.Pistol import Pistol
 
 
-class Player(Sprite):
+class Player(Character):
     
     # Controls
     control_left = pygame.K_a

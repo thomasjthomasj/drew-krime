@@ -66,7 +66,6 @@ class Player(Character):
             self.direction = 'right'
     
     def draw(self, screen):
-        # Temporary true if statement
         if self.render:
             self.applyPhysics()
             self.setDirection()

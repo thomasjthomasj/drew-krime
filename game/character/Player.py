@@ -56,10 +56,20 @@ class Player(Sprite):
         self.ground_level = dimensions[1] - 100
         Game.addSprite("player", self)
     
+    def setDirection(self):
+        mouse_pos = pygame.mouse.get_pos()
+        if mouse_pos[0] < self.centre_pos[0] and self.direction == 'right':
+            self.flipVert()
+            self.direction = 'left'
+        elif mouse_pos[0] > self.centre_pos[0] and self.direction == 'left':
+            self.flipVert()
+            self.direction = 'right'
+    
     def draw(self, screen):
         # Temporary true if statement
         if self.render:
             self.applyPhysics()
+            self.setDirection()
             
             if self.sneak:
                 if self.move_x < 0:
@@ -82,9 +92,7 @@ class Player(Sprite):
             self.sneak = True
         
         if key == self.control_left:
-            if self.direction == 'right':
-                self.image = pygame.transform.flip(self.image, 1, 0)
-            self.direction = 'left'
+            
             self.moveLeft(self.walk_speed)
         elif key == self.control_right:
             if self.direction == 'left':

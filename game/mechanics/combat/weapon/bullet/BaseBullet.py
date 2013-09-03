@@ -9,6 +9,7 @@ class BaseBullet(Sprite):
     move_y = 0
     target = False
     speed = 0
+    damage = 1
     
     @property
     def int_pos(self):

@@ -27,6 +27,7 @@ class Player(Character):
     sneak_speed = 2
     sneak = False
     direction = False
+    z_index = 5
     
     # Combat
     weapon = False
@@ -45,8 +46,9 @@ class Player(Character):
     jump_level_up = 0
     jump_level_up_cap = 5
     
+    health = 5
+    
     # Misc
-    render = True
     ground_level = 700
     
     def __init__(self):
@@ -69,6 +71,7 @@ class Player(Character):
         if self.render:
             self.applyPhysics()
             self.setDirection()
+            self.checkHealth()
             
             if self.sneak:
                 if self.move_x < 0:
@@ -83,7 +86,6 @@ class Player(Character):
                     self.pos[0] += self.move_x
             
         self.pos[1] += self.move_y
-        screen.fill((0,0,0))
         screen.blit(self.image, self.pos)
         
     def keyDown(self, key):

@@ -18,6 +18,7 @@ pygame.init()
 from game.Game import Game
 from game.character.Player import Player
 from game.mechanics.Crosshair import Crosshair
+from game.world.Background import Background
 
 # Setup screen
 size = Game.getDefaultDimensions()
@@ -27,9 +28,12 @@ pygame.display.set_caption(project_title)
 screen.convert()
 
 # Run game
+Game.addSpriteGroup("world")
 Game.addSpriteGroup("player")
 Game.addSpriteGroup("bullets")
+Game.addSpriteGroup("enemies")
 
+background = Background()
 player = Player()
 crosshair = Crosshair()
 

@@ -5,6 +5,9 @@ class Sprite(pygame.sprite.Sprite):
     sprite_path = 'sprites/'
     
     direction = False
+    damage = 0
+    z_index = 0
+    render = True
     
     @property
     def centre_pos(self):
@@ -20,6 +23,7 @@ class Sprite(pygame.sprite.Sprite):
         y_pos = pos[1] - self.src_height / 2
         self.pos = [x_pos, y_pos]
         self.image = self.src_image
+        self.image.set_colorkey((0,0,0))
         self.rect = self.src_image.get_rect()
         
     def flipVert(self):

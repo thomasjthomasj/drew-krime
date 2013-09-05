@@ -24,7 +24,4 @@ class Pistol(BaseWeapon):
             super(Pistol, self).fire()
             self.ammo = self.ammo - 1
     
-    def reload_ammo(self):
-        self.reloaded_at = pygame.time.get_ticks()
-        self.reloading = True
         

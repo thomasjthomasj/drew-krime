@@ -26,7 +26,7 @@ class Player(Character):
     walk_speed = 4
     sneak_speed = 2
     sneak = False
-    direction = False
+    direction = 'right'
     z_index = 5
     
     # Combat

@@ -5,6 +5,26 @@ from game.mechanics.combat.weapon.BaseWeapon import BaseWeapon
 class Pistol(BaseWeapon):
     
     speed = 30
+    ammo = 6
+    max_ammo = 6
+    reload_time = 500
     
     def __init__(self, pos):
         super(Pistol, self).__init__(pos)
+        
+    def fire(self):
+        # Check ammo count,reload if out
+        if self.ammo <= 0 and self.reloading == False:
+            self.reload_ammo()
+        elif self.reloading == True:
+            if pygame.time.get_ticks() > (self.reloaded_at + self.reload_time):
+                self.ammo = self.max_ammo
+                self.reloading = False
+        if self.reloading == False:
+            super(Pistol, self).fire()
+            self.ammo = self.ammo - 1
+    
+    def reload_ammo(self):
+        self.reloaded_at = pygame.time.get_ticks()
+        self.reloading = True
+        

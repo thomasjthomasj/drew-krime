@@ -9,8 +9,8 @@ class Pistol(BaseWeapon):
     max_ammo = 6
     reload_time = 500
     
-    def __init__(self, pos):
-        super(Pistol, self).__init__(pos)
+    def __init__(self, carrier):
+        super(Pistol, self).__init__(carrier)
         
     def fire(self):
         # Check ammo count,reload if out

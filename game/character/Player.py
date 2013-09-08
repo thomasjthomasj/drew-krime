@@ -6,7 +6,7 @@ from game.Game import Game
 from game.mechanics.Leveller import Leveller
 from game.mechanics.combat.weapon.BaseWeapon import BaseWeapon
 from game.mechanics.combat.weapon.Pistol import Pistol
-from game.location.TestLevel import TestLevel
+from game.location.BaseLocation import BaseLocation
 
 class Player(Character):
     
@@ -46,7 +46,7 @@ class Player(Character):
     def __init__(self):
         super(Player, self).__init__("player.png", [300, 200])
         self.weapon = Pistol(self)
-        self.location = TestLevel(self)
+        self.location = BaseLocation(self)
         dimensions = Game.getDefaultDimensions()
         Game.addSprite("player", self)
     
@@ -64,6 +64,10 @@ class Player(Character):
             self.applyPhysics()
             self.setDirection()
             self.checkHealth()
+            
+            if self.dead == True:
+                self.dead = False
+                self.pos = [300, 200]
             
             if self.sneak:
                 self.moveSneak()

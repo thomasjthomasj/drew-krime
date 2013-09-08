@@ -21,7 +21,7 @@ class Platform(Terrain):
         return self.inLeftBoundry(character) and self.inRightBoundry(character)
     
     def inLeftBoundry(self, character):
-        return character.pos[0] - character.src_width > self.pos[0]
+        return character.pos[0] + character.src_width > self.pos[0]
     
     def inRightBoundry(self, character):
         return character.pos[0] < self.pos[0] + self.width

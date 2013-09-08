@@ -9,7 +9,7 @@ class Background(Sprite):
     def __init__(self):
         dimensions = Game.getDefaultDimensions()
         pos = (dimensions[0] / 2, dimensions[1] / 2)
-        super(Background, self).__init__("background.png", pos)
+        super(Background, self).__init__("world/background.png", pos)
         Game.addSprite("world", self)
     
     def draw(self, screen):

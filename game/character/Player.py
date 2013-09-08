@@ -74,16 +74,10 @@ class Player(Character):
             self.checkHealth()
             
             if self.sneak:
-                if self.move_x < 0:
-                    self.pos[0] -= self.sneak_speed
-                elif self.move_x > 0:
-                    self.pos[0] += self.sneak_speed
+                self.moveSneak()
             else:
-                # If statements to allow for map movement in the future
-                if self.move_x < 0:
-                    self.pos[0] += self.move_x
-                elif self.move_x > 0:
-                    self.pos[0] += self.move_x
+                self.moveHor()
+            
             
         self.pos[1] += self.move_y
         screen.blit(self.image, self.pos)
@@ -124,6 +118,20 @@ class Player(Character):
     
     def moveRight(self, speed):
         self.move_x = self.move_x + speed
+    
+    def moveSneak(self):
+        dimensions = Game.getDefaultDimensions()
+        if self.move_x < 0 and self.pos[0] > 0:
+            self.pos[0] -= self.sneak_speed
+        elif self.move_x > 0 and self.pos[0] < (dimensions[0] - self.src_width):
+            self.pos[0] += self.sneak_speed
+    
+    def moveHor(self):
+        dimensions = Game.getDefaultDimensions()
+        if self.pos[0] >= 0 and self.move_x < 0:
+            self.pos[0] += self.move_x
+        elif self.pos[0] <= (dimensions[0] - self.src_width) and self.move_x > 0:
+            self.pos[0] += self.move_x
         
     def jump(self):
         self.vel_y = 0 - self.level_jump

@@ -28,4 +28,4 @@ class Platform(Terrain):
     
     def onTop(self, character):
         boundry = self.pos[1] - (character.move_y - character.vel_y)
-        return character.foot_pos <= self.pos[1] and character.foot_pos >= boundry
+        return character.foot_pos <= self.pos[1] + 5 and character.foot_pos >= boundry

@@ -41,7 +41,7 @@ class Character(Sprite):
         if platform and self.vel_y >= 0:
             self.vel_y = 0
             self.move_y = 0
-            self.pos[1] = platform.pos[1] - self.src_height
+            self.pos[1] = platform.pos[1] - self.src_height + 5
         else:
             self.vel_y += Game.gravity
     

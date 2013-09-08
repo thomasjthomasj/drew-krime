@@ -53,6 +53,8 @@ class BaseWeapon(object):
         self.pos = (pos_x, pos_y)
     
     def reload_ammo(self):
+        if self.reloading == True:
+            return
         self.reloaded_at = pygame.time.get_ticks()
         self.reloading = True
         

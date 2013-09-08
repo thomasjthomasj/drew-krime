@@ -1,5 +1,6 @@
 import pygame
 from game.visuals.Sprite import Sprite
+from game.Game import Game
 
 class Character(Sprite):
     
@@ -14,6 +15,7 @@ class Character(Sprite):
     walk_speed = 4
     sneak_speed = 2
     direction = 'right'
+    location = False
     
     @property
     def foot_pos(self):
@@ -26,4 +28,11 @@ class Character(Sprite):
         if self.health <= 0:
             self.dead = True
     
+    def applyPhysics(self):
+        self.move_y = self.move_y + self.vel_y
+        self.vel_y += Game.gravity
+        if self.grounded:
+            self.vel_y = 0
+            self.move_y = 0
+            self.pos[1] = self.floor_level
     

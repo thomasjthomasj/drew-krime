@@ -4,7 +4,7 @@ import random
 from game.world.Platform import Platform
 from game.Game import Game
 
-class Level(object):
+class TestLevel(object):
     
     player = False
     platforms = []

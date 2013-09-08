@@ -4,8 +4,9 @@ import pygame, math, random
 from game.character.Character import Character
 from game.Game import Game
 from game.mechanics.Leveller import Leveller
+from game.mechanics.combat.weapon.BaseWeapon import BaseWeapon
 from game.mechanics.combat.weapon.Pistol import Pistol
-from game.location.Level import Level
+from game.location.TestLevel import TestLevel
 
 class Player(Character):
     
@@ -16,6 +17,7 @@ class Player(Character):
     control_down = pygame.K_s
     control_jump = pygame.K_SPACE
     control_sneak = pygame.K_LSHIFT
+    control_reload = pygame.K_r
     control_fire = 1
     control_melee = 3
     
@@ -41,7 +43,6 @@ class Player(Character):
     jump_level_up_cap = 5
     
     health = 5
-    location = False
     
     # Misc
     ground_level = 700
@@ -71,7 +72,7 @@ class Player(Character):
     def __init__(self):
         super(Player, self).__init__("player.png", [300, 200])
         self.weapon = Pistol(self)
-        self.location = Level(self)
+        self.location = TestLevel(self)
         dimensions = Game.getDefaultDimensions()
         self.ground_level = dimensions[1] - 100
         Game.addSprite("player", self)
@@ -109,6 +110,9 @@ class Player(Character):
             self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
             self.jump()
+        elif key == self.control_reload:
+            if isinstance(self.weapon, BaseWeapon):
+                self.weapon.reload_ammo()
     
     def keyUp(self, key):
         if key == self.control_left:
@@ -152,12 +156,3 @@ class Player(Character):
         if self.jumping == False:
             self.jumping = True
             self.vel_y = 0 - (1 + self.level_jump / 2)
-            Leveller.levelUpJump(self)
-            
-    def applyPhysics(self):
-        self.move_y = self.move_y + self.vel_y
-        self.vel_y += Game.gravity
-        if self.grounded:
-            self.vel_y = 0
-            self.move_y = 0
-            self.pos[1] = self.floor_level

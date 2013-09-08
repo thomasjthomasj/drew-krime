@@ -50,6 +50,8 @@ class Player(Character):
     
     @property
     def grounded(self):
+        if self.jumping == True:
+            return False
         if self.foot_pos >= self.ground_level:
             return True
         return self.on_platform
@@ -96,7 +98,6 @@ class Player(Character):
                 self.moveSneak()
             else:
                 self.moveHor()
-            
             
         self.pos[1] += self.move_y
         screen.blit(self.image, self.pos)

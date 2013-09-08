@@ -5,7 +5,7 @@ from game.character.Character import Character
 from game.Game import Game
 from game.mechanics.Leveller import Leveller
 from game.mechanics.combat.weapon.Pistol import Pistol
-
+from game.location.Level import Level
 
 class Player(Character):
     
@@ -47,6 +47,7 @@ class Player(Character):
     jump_level_up_cap = 5
     
     health = 5
+    location = False
     
     # Misc
     ground_level = 700
@@ -54,6 +55,7 @@ class Player(Character):
     def __init__(self):
         super(Player, self).__init__("player.png", [300, 200])
         self.weapon = Pistol(self)
+        self.location = Level(self)
         dimensions = Game.getDefaultDimensions()
         self.ground_level = dimensions[1] - 100
         Game.addSprite("player", self)

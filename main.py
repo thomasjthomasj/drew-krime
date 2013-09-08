@@ -32,6 +32,7 @@ Game.addSpriteGroup("world")
 Game.addSpriteGroup("player")
 Game.addSpriteGroup("bullets")
 Game.addSpriteGroup("enemies")
+Game.addSpriteGroup("terrain")
 
 background = Background()
 player = Player()

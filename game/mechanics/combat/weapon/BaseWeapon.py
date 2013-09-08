@@ -12,6 +12,10 @@ class BaseWeapon(object):
     reload_time = 0
     reloading = False
     reloaded_at = False
+    
+    @property
+    def bullet(self):
+        return BaseBullet(self.pos)
 
     def __init__(self, carrier):
         '''takes Sprite instance as parameter'''
@@ -22,7 +26,7 @@ class BaseWeapon(object):
     def fire(self):
         self.setPos()
         mousePos = pygame.mouse.get_pos()
-        bullet = BaseBullet(self.pos)
+        bullet = self.bullet
         bullet.move(mousePos, self.speed)
         Game.addSprite("bullets", bullet)
     

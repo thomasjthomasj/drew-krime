@@ -44,6 +44,8 @@ clock = pygame.time.Clock()
 # Program loop
 inLoop = True
 while inLoop:
+    
+    clock.tick(Game.fps)
     for event in pygame.event.get():
         
         if event.type == pygame.QUIT:
@@ -63,13 +65,8 @@ while inLoop:
         
         elif event.type == pygame.MOUSEBUTTONUP:
             player.mouseUp(event.button)
-        
-        elif event.type == pygame.MOUSEMOTION:
-            pass
     
     Game.render(screen, int(clock.get_time()), int(pygame.time.get_ticks()))
-    
-    clock.tick(Game.fps)
     
     pygame.display.flip()
 

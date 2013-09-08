@@ -10,6 +10,9 @@ class BaseBullet(Sprite):
     target = False
     speed = 0
     damage = 1
+    bullet_life = 60000
+    time_fired = 0
+    src_img = 'bullet.png'
     
     @property
     def int_pos(self):
@@ -22,7 +25,7 @@ class BaseBullet(Sprite):
         return map(int, self.target)
     
     def __init__(self, pos):
-        super(BaseBullet, self).__init__('bullet.png', pos)
+        super(BaseBullet, self).__init__(self.src_img, pos)
         
     def draw(self, screen):
         if self.render:
@@ -33,6 +36,7 @@ class BaseBullet(Sprite):
             screen.blit(self.image, self.pos)
     
     def move(self, target, speed):
+        self.time_fired = pygame.time.get_ticks()
         self.target = target
         self.speed = speed
         self.render = True
@@ -46,7 +50,7 @@ class BaseBullet(Sprite):
         # Stolen from http://stackoverflow.com/questions/16288905/make-a-sprite-move-to-the-mouse-click-position-step-by-step/16294710#16294710
         target_vector = Vector.sub(self.target, self.pos)
             
-        if Vector.magnitude(target_vector) < self.speed:
+        if pygame.time.get_ticks() > (self.time_fired + self.bullet_life):
             self.render = False
             return
         

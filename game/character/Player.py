@@ -21,10 +21,6 @@ class Player(Character):
     control_fire = 1
     control_melee = 3
     
-    # Toggles
-    sneak = False
-    jumping = False
-    
     # Combat
     weapon = False
     
@@ -45,38 +41,13 @@ class Player(Character):
     health = 5
     
     # Misc
-    ground_level = 700
     platform = False
-    
-    @property
-    def grounded(self):
-        if self.jumping == True:
-            return False
-        if self.foot_pos >= self.ground_level:
-            return True
-        return self.on_platform
-    
-    @property
-    def floor_level(self):
-        if self.on_platform:
-            return self.platform.pos[1]
-        return self.ground_level
-    
-    @property
-    def on_platform(self):
-        for platform in self.location.platforms:
-            if platform.onPlatform(self):
-                self.platform = platform
-                return True
-        
-        return False
     
     def __init__(self):
         super(Player, self).__init__("player.png", [300, 200])
         self.weapon = Pistol(self)
         self.location = TestLevel(self)
         dimensions = Game.getDefaultDimensions()
-        self.ground_level = dimensions[1] - 100
         Game.addSprite("player", self)
     
     def setDirection(self):
@@ -97,10 +68,10 @@ class Player(Character):
             if self.sneak:
                 self.moveSneak()
             else:
-                self.moveHor()
+                self.moveX()
             
-        self.pos[1] += self.move_y
-        screen.blit(self.image, self.pos)
+            self.pos[1] += self.move_y
+            screen.blit(self.image, self.pos)
         
     def keyDown(self, key):
         if key == self.control_sneak:
@@ -144,16 +115,9 @@ class Player(Character):
         elif self.move_x > 0 and self.pos[0] < (dimensions[0] - self.src_width):
             self.pos[0] += self.sneak_speed
     
-    def moveHor(self):
+    def moveX(self):
         dimensions = Game.getDimensions()
         if self.pos[0] >= 0 and self.move_x < 0:
             self.pos[0] += self.move_x
         elif self.pos[0] <= (dimensions[0] - self.src_width) and self.move_x > 0:
             self.pos[0] += self.move_x
-        
-    def jump(self):
-        if self.grounded == True:
-            self.jumping = False
-        if self.jumping == False:
-            self.jumping = True
-            self.vel_y = 0 - (1 + self.level_jump / 2)

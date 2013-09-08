@@ -8,6 +8,7 @@ class TestLevel(object):
     
     player = False
     platforms = []
+    ground_level = 700
     
     def __init__(self, player):
         self.player = player

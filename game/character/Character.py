@@ -17,9 +17,33 @@ class Character(Sprite):
     direction = 'right'
     location = False
     
+    # Toggles
+    sneak = False
+    
     @property
     def foot_pos(self):
         return self.pos[1] + self.src_height
+    
+    @property
+    def grounded(self):
+        if self.foot_pos >= self.location.ground_level:
+            return True
+        return self.on_platform
+    
+    @property
+    def floor_level(self):
+        if self.on_platform:
+            return self.platform.pos[1]
+        return self.location.ground_level
+    
+    @property
+    def on_platform(self):
+        for platform in self.location.platforms:
+            if platform.onPlatform(self):
+                self.platform = platform
+                return True
+        
+        return False
     
     def __init__(self, src, pos):
         super(Character, self).__init__(src, pos)
@@ -27,12 +51,17 @@ class Character(Sprite):
     def checkHealth(self):
         if self.health <= 0:
             self.dead = True
+            
+    def jump(self):
+        if self.grounded == True:
+            self.vel_y = 0 - (1 + self.level_jump / 2)
     
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y
-        self.vel_y += Game.gravity
-        if self.grounded:
+        if self.grounded and self.vel_y >= 0:
             self.vel_y = 0
             self.move_y = 0
-            self.pos[1] = self.floor_level
+            self.pos[1] = self.floor_level - self.src_height
+        else:
+            self.vel_y += Game.gravity
     

@@ -27,11 +27,10 @@ class BaseLocation(object):
         dimensions = Game.getDefaultDimensions()
         platform1_pos = (50, dimensions[1] - 100)
         platform1 = Platform(self, platform1_pos, self.random_colour, 400, 50)
-        room = Room(self, (self.dimensions[0] / 4, self.dimensions[1] / 4), (500,400), (10,10,10,10), True, True)
+        room = Room(self, (self.dimensions[0] / 4, self.dimensions[1] / 4), (400,300), (10,10,30,10), True, True)
         room.buildFloor((255,255,255))
         room.buildWalls((255,0,0), (0,255,0))
         room.buildCeiling((0,0,255))
-        print(self.platforms)
         
     def getPlatform(self, character):
         for platform in self.platforms:

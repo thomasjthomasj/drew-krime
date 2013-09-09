@@ -1,7 +1,7 @@
 import pygame
 from game.world.terrain.Wall import Wall
 
-class Ceiling(Platform):
+class Ceiling(Wall):
     
     bottom_clip = True
     

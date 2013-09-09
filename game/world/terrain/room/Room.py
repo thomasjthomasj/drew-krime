@@ -1,5 +1,7 @@
 import pygame
-import game.world.terrain
+from game.world.terrain.Platform import Platform
+from game.world.terrain.Ceiling import Ceiling
+from game.world.terrain.Wall import Wall
 from game.world.terrain.door.SideDoor import SideDoor
 
 class Room(object):
@@ -46,35 +48,35 @@ class Room(object):
     def buildFloor(self, src, ceiling = False):
         pos = (self.pos[0], self.floor_level)
         if ceiling:
-            self.floor = terrain.Ceiling(self.location, pos, src, dimensions[0], borders[2])
-        self.floor = terrain.Platform(self.location, pos, src, borders[2], dimensions[0])
+            self.floor = Ceiling(self.location, pos, src, self.dimensions[0], self.borders[2])
+        self.floor = Platform(self.location, pos, src, self.dimensions[0], self.borders[2])
     
     def buildCeiling(self, src):
-        self.ceiling = terrain.Ceiling(self.location, self.pos, src, dimensions[0], borders[0])
+        self.ceiling = Ceiling(self.location, self.pos, src, self.dimensions[0], self.borders[0])
     
     def buildWalls(self, leftSrc, rightSrc):
         self.buildLeftWall(leftSrc)
         self.buildRightWall(rightSrc)
         
     def buildLeftWall(self, src):
-        wall_pos = (self.pos[0], ceiling_level)
+        wall_pos = (self.pos[0], self.ceiling_level)
         if self.left_door:
             door_pos = (self.pos[0], self.floor_level - self.door_height)
             wall_height = self.wall_height - self.door_height
-            self.left_door = SideDoor(self.location, door_pos, borders[3], self.door_height)
-            self.left_wall = terrain.Wall(self.location, wall_pos, src, borders[3], wall_height)
+            self.left_door = SideDoor(self.location, door_pos, self.borders[3], self.door_height)
+            self.left_wall = Wall(self.location, wall_pos, src, self.borders[3], wall_height)
             return
-        self.left_wall = terrain.Wall(self.location, wall_pos, src, borders[3], self.wall_height)
+        self.left_wall = Wall(self.location, wall_pos, src, self.borders[3], self.wall_height)
         
     def buildRightWall(self, src):
-        wall_pos = (self.dimensions[0] - borders[1], ceiling_level)
+        wall_pos = (self.pos[0] + self.dimensions[0] - self.borders[1], self.ceiling_level)
         if self.right_door:
-            door_pos = (self.dimensions[0] - borders[1], self.floor_level - self.door_height)
+            door_pos = (self.pos[0] + self.dimensions[0] - self.borders[1], self.floor_level - self.door_height)
             wall_height = self.wall_height - self.door_height
-            self.right_door = SideDoor(self.location, door_pos, borders[1], self.door_height)
-            self.right_wall = terrain.Wall(self.location, wall_pos, src, borders[1], wall_height)
+            self.right_door = SideDoor(self.location, door_pos, self.borders[1], self.door_height)
+            self.right_wall = Wall(self.location, wall_pos, src, self.borders[1], wall_height)
             return
-        self.right_wall = terrain.Wall(self.location, wall_pos, src, borders[1], self.wall_height)
+        self.right_wall = Wall(self.location, wall_pos, src, self.borders[1], self.wall_height)
         
         
         

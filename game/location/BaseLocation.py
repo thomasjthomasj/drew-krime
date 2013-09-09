@@ -3,6 +3,7 @@ from random import randint
 
 from game.world.terrain.Platform import Platform
 from game.world.terrain.Wall import Wall
+from game.world.terrain.room.Room import Room
 from game.Game import Game
 
 class BaseLocation(object):
@@ -26,13 +27,11 @@ class BaseLocation(object):
         dimensions = Game.getDefaultDimensions()
         platform1_pos = (50, dimensions[1] - 100)
         platform1 = Platform(self, platform1_pos, self.random_colour, 400, 50)
-        platform2_pos = (randint(0, dimensions[0]), randint(0, dimensions[1]))
-        platform2 = Platform(self, platform2_pos, self.random_colour, 300, 20)
-        platform3_pos = (dimensions[0] - 80, dimensions[1] - 40)
-        platform3 = Platform(self, platform3_pos, self.random_colour, 85, 20)
-        self.platforms.append(platform1)
-        self.platforms.append(platform2)
-        self.platforms.append(platform3)
+        room = Room(self, (self.dimensions[0] / 4, self.dimensions[1] / 4), (500,400), (10,10,10,10), True, True)
+        room.buildFloor((255,255,255))
+        room.buildWalls((255,0,0), (0,255,0))
+        room.buildCeiling((0,0,255))
+        print(self.platforms)
         
     def getPlatform(self, character):
         for platform in self.platforms:

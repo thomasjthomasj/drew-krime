@@ -1,6 +1,6 @@
 import pygame
 
-from game.world.Terrain import Terrain
+from game.world.terrain.Terrain import Terrain
 from game.Game import Game
 
 class Platform(Terrain):

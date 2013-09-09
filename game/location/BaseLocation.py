@@ -1,7 +1,7 @@
 import pygame
 import random
 
-from game.world.Platform import Platform
+from game.world.terrain.Platform import Platform
 from game.Game import Game
 
 class BaseLocation(object):

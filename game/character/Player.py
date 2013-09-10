@@ -20,6 +20,7 @@ class Player(Character):
     control_reload = pygame.K_r
     control_fire = 1
     control_melee = 3
+    control_open = pygame.K_LCTRL
     
     # Combat
     weapon = False
@@ -86,6 +87,8 @@ class Player(Character):
             self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
             self.jump()
+        elif key == self.control_open:
+            self.location.toggleDoor(self)
         elif key == self.control_reload:
             if isinstance(self.weapon, BaseWeapon):
                 self.weapon.reload_ammo()

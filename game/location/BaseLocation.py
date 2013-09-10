@@ -4,6 +4,7 @@ from random import randint
 from game.world.terrain.Platform import Platform
 from game.world.terrain.Wall import Wall
 from game.world.terrain.room.Room import Room
+from game.world.terrain.door.SideDoor import SideDoor
 from game.Game import Game
 
 class BaseLocation(object):
@@ -43,6 +44,11 @@ class BaseLocation(object):
             if terrain.againstRight(character):
                 return True
         return False
+        
+    def toggleDoor(self, character):
+        for terrain in self.terrain:
+            if isinstance(terrain, SideDoor):
+                terrain.toggleDoor(character)
         
     def getTerrain(self, character):
         for terrain in self.terrain:

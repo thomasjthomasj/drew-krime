@@ -16,6 +16,7 @@ class Terrain(pygame.sprite.Sprite):
         self.pos = pos
         self.width = width
         self.height = height
+        self.src = src
         
         self.image = pygame.Surface([self.width, self.height])
         

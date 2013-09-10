@@ -5,6 +5,7 @@ class Wall(Platform):
     
     left_clip = True
     right_clip = True
+    top_clip = False
     
     def __init__(self, level, pos, src, width, height):
         super(Wall, self).__init__(level, pos, src, width, height)

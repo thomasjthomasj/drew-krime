@@ -4,6 +4,7 @@ from game.world.terrain.Wall import Wall
 class SideDoor(Wall):
     
     door_open = False
+    top_clip = False
     
     @property
     def left_clip(self):

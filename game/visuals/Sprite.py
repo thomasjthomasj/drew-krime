@@ -8,6 +8,8 @@ class Sprite(pygame.sprite.Sprite):
     damage = 0
     z_index = 0
     render = True
+    width = 0
+    height = 0
     
     @property
     def centre_pos(self):
@@ -21,6 +23,8 @@ class Sprite(pygame.sprite.Sprite):
         self.src_width, self.src_height = self.src_image.get_size()
         x_pos = pos[0] - self.src_width / 2
         y_pos = pos[1] - self.src_height / 2
+        self.width = self.src_width
+        self.height = self.src_height
         self.pos = [x_pos, y_pos]
         self.image = self.src_image
         self.image.set_colorkey((0,0,0))

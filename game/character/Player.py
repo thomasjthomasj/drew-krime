@@ -20,6 +20,7 @@ class Player(Character):
     control_reload = pygame.K_r
     control_fire = 1
     control_melee = 3
+    control_open = pygame.K_LCTRL
     
     # Combat
     weapon = False
@@ -41,7 +42,7 @@ class Player(Character):
     health = 5
     
     # Misc
-    platform = False
+    terrain = False
     
     def __init__(self):
         super(Player, self).__init__("player.png", [300, 200])
@@ -86,6 +87,8 @@ class Player(Character):
             self.moveRight(self.walk_speed)
         elif key == self.control_jump and self.pos[1]>= 300:
             self.jump()
+        elif key == self.control_open:
+            self.location.toggleDoor(self)
         elif key == self.control_reload:
             if isinstance(self.weapon, BaseWeapon):
                 self.weapon.reload_ammo()
@@ -105,12 +108,6 @@ class Player(Character):
     def mouseUp(self, button):
         if button == self.control_fire:
             self.weapon.ceaseFire()
-            
-    def moveLeft(self, speed):
-        self.move_x = self.move_x - speed
-    
-    def moveRight(self, speed):
-        self.move_x = self.move_x + speed
     
     def moveSneak(self):
         dimensions = Game.getDimensions()
@@ -118,10 +115,3 @@ class Player(Character):
             self.pos[0] -= self.sneak_speed
         elif self.move_x > 0 and self.pos[0] < (dimensions[0] - self.src_width):
             self.pos[0] += self.sneak_speed
-    
-    def moveX(self):
-        dimensions = Game.getDimensions()
-        if self.pos[0] >= 0 and self.move_x < 0:
-            self.pos[0] += self.move_x
-        elif self.pos[0] <= (dimensions[0] - self.src_width) and self.move_x > 0:
-            self.pos[0] += self.move_x

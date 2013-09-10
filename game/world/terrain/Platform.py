@@ -7,26 +7,5 @@ class Platform(Terrain):
     
     top_clip = True
     
-    def __init__(self, level, pos, src, width, height):
-        super(Platform, self).__init__(pos, src, width, height)
-        level.platforms.append(self)
-    
-    def onPlatform(self, character):
-        if self.top_clip == False:
-            return False
-        if self.onTop(character) and self.inBoundry(character):
-            return True
-        return False
-    
-    def inBoundry(self, character):
-        return self.inLeftBoundry(character) and self.inRightBoundry(character)
-    
-    def inLeftBoundry(self, character):
-        return character.pos[0] + character.src_width > self.pos[0]
-    
-    def inRightBoundry(self, character):
-        return character.pos[0] < self.pos[0] + self.width
-    
-    def onTop(self, character):
-        boundry = self.pos[1] - (character.move_y + character.vel_y)
-        return character.foot_pos <= self.pos[1] + 5 and character.foot_pos >= boundry
+    def __init__(self, location, pos, src, width, height):
+        super(Platform, self).__init__(location, pos, src, width, height)

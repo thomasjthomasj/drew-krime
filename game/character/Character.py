@@ -40,19 +40,19 @@ class Character(Sprite):
             self.vel_y = 0 - (1 + self.level_jump / 2)
                 
     def moveLeft(self, speed):
-        if self.location.againstTerrainLeft(self) == False:
-            self.move_x = self.move_x - speed
+        self.move_x = self.move_x - speed
     
     def moveRight(self, speed):
-        if self.location.againstTerrainRight(self) == False:
-            self.move_x = self.move_x + speed
+        self.move_x = self.move_x + speed
     
     def moveX(self):
         dimensions = Game.getDimensions()
         if self.pos[0] >= 0 and self.move_x < 0:
-            self.pos[0] += self.move_x
+            if self.location.againstTerrainRight(self) == False:
+                self.pos[0] += self.move_x
         elif self.pos[0] <= (dimensions[0] - self.src_width) and self.move_x > 0:
-            self.pos[0] += self.move_x
+            if self.location.againstTerrainLeft(self) == False:
+                self.pos[0] += self.move_x
     
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y

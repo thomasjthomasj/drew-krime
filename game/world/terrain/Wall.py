@@ -1,11 +1,11 @@
 import pygame
-from game.world.terrain.Platform import Platform
+from game.world.terrain.Terrain import Terrain
 
-class Wall(Platform):
+class Wall(Terrain):
     
     left_clip = True
     right_clip = True
-    top_clip = False
+    top_clip = True
     
-    def __init__(self, level, pos, src, width, height):
-        super(Wall, self).__init__(level, pos, src, width, height)
+    def __init__(self, location, pos, src, width, height):
+        super(Wall, self).__init__(location, pos, src, width, height)

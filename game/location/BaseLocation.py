@@ -9,7 +9,7 @@ from game.Game import Game
 class BaseLocation(object):
     
     player = False
-    platforms = []
+    terrain = []
     
     @property
     def dimensions(self):
@@ -27,15 +27,26 @@ class BaseLocation(object):
         dimensions = Game.getDefaultDimensions()
         platform1_pos = (50, dimensions[1] - 100)
         platform1 = Platform(self, platform1_pos, self.random_colour, 400, 50)
-        room = Room(self, (self.dimensions[0] / 4, self.dimensions[1] / 4), (400,300), (10,10,30,10), True, True)
+        room = Room(self, (self.dimensions[0] / 4, self.dimensions[1] / 3), (400,300), (10,10,30,10), True, True)
         room.buildFloor((255,255,255))
         room.buildWalls((255,0,0), (0,255,0))
         room.buildCeiling((0,0,255))
         
-    def getPlatform(self, character):
-        for platform in self.platforms:
-            if platform.onPlatform(character):
-                return platform
+    def againstTerrainLeft(self, character):
+        for terrain in self.terrain:
+            if terrain.againstLeft(character):
+                return True
+        return False
+    
+    def againstTerrainRight(self, character):
+        for terrain in self.terrain:
+            if terrain.againstRight(character):
+                return True
+        return False
         
+    def getTerrain(self, character):
+        for terrain in self.terrain:
+            if terrain.onTerrain(character):
+                return terrain
         return False
     

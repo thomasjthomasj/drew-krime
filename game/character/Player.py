@@ -41,7 +41,7 @@ class Player(Character):
     health = 5
     
     # Misc
-    platform = False
+    terrain = False
     
     def __init__(self):
         super(Player, self).__init__("player.png", [300, 200])
@@ -105,12 +105,6 @@ class Player(Character):
     def mouseUp(self, button):
         if button == self.control_fire:
             self.weapon.ceaseFire()
-            
-    def moveLeft(self, speed):
-        self.move_x = self.move_x - speed
-    
-    def moveRight(self, speed):
-        self.move_x = self.move_x + speed
     
     def moveSneak(self):
         dimensions = Game.getDimensions()
@@ -118,10 +112,3 @@ class Player(Character):
             self.pos[0] -= self.sneak_speed
         elif self.move_x > 0 and self.pos[0] < (dimensions[0] - self.src_width):
             self.pos[0] += self.sneak_speed
-    
-    def moveX(self):
-        dimensions = Game.getDimensions()
-        if self.pos[0] >= 0 and self.move_x < 0:
-            self.pos[0] += self.move_x
-        elif self.pos[0] <= (dimensions[0] - self.src_width) and self.move_x > 0:
-            self.pos[0] += self.move_x

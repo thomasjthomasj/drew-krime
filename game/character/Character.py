@@ -24,6 +24,10 @@ class Character(Sprite):
     def foot_pos(self):
         return self.pos[1] + self.src_height
     
+    @property
+    def left_pos(self):
+        return self.pos[0] + self.width
+    
     def __init__(self, src, pos):
         super(Character, self).__init__(src, pos)
         
@@ -32,16 +36,31 @@ class Character(Sprite):
             self.dead = True
             
     def jump(self):
-        if self.location.getPlatform(self):
+        if self.location.getTerrain(self):
             self.vel_y = 0 - (1 + self.level_jump / 2)
+                
+    def moveLeft(self, speed):
+        if self.location.againstTerrainLeft(self) == False:
+            self.move_x = self.move_x - speed
+    
+    def moveRight(self, speed):
+        if self.location.againstTerrainRight(self) == False:
+            self.move_x = self.move_x + speed
+    
+    def moveX(self):
+        dimensions = Game.getDimensions()
+        if self.pos[0] >= 0 and self.move_x < 0:
+            self.pos[0] += self.move_x
+        elif self.pos[0] <= (dimensions[0] - self.src_width) and self.move_x > 0:
+            self.pos[0] += self.move_x
     
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y
-        platform = self.location.getPlatform(self)
-        if platform and self.vel_y >= 0:
+        terrain = self.location.getTerrain(self)
+        if terrain and self.vel_y >= 0:
             self.vel_y = 0
             self.move_y = 0
-            self.pos[1] = platform.pos[1] - self.src_height + 5
+            self.pos[1] = terrain.pos[1] - self.src_height + 5
         else:
             self.vel_y += Game.gravity
     

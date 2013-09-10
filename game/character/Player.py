@@ -20,7 +20,7 @@ class Player(Character):
     control_reload = pygame.K_r
     control_fire = 1
     control_melee = 3
-    control_open = pygame.K_LCTRL
+    control_open = pygame.K_e
     
     # Combat
     weapon = False

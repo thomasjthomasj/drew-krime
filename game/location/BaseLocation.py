@@ -28,7 +28,7 @@ class BaseLocation(object):
         dimensions = Game.getDefaultDimensions()
         platform1_pos = (50, dimensions[1] - 100)
         platform1 = Platform(self, platform1_pos, self.random_colour, 400, 50)
-        room = Room(self, (self.dimensions[0] / 4, self.dimensions[1] / 3), (400,300), (10,10,30,10), True, False)
+        room = Room(self, (self.dimensions[0] / 4, self.dimensions[1] / 3 + 100), (400,200), (10,10,30,10), True, False)
         room.buildFloor((255,255,255))
         room.buildWalls((255,0,0), (0,255,0))
         room.buildCeiling((0,0,255))
@@ -54,5 +54,12 @@ class BaseLocation(object):
         for terrain in self.terrain:
             if terrain.onTerrain(character):
                 return terrain
+        return False
+    
+    def touchCeiling(self, character):
+        for terrain in self.terrain:
+            if terrain.touchCeiling(character):
+                character.pos[1] = terrain.pos[1] + terrain.height
+                return True
         return False
     

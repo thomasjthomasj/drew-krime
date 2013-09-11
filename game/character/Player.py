@@ -85,7 +85,7 @@ class Player(Character):
             self.moveLeft(self.walk_speed)
         elif key == self.control_right:
             self.moveRight(self.walk_speed)
-        elif key == self.control_jump and self.pos[1]>= 300:
+        elif key == self.control_jump:
             self.jump()
         elif key == self.control_open:
             self.location.toggleDoor(self)

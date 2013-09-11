@@ -61,6 +61,9 @@ class Character(Sprite):
     def applyPhysics(self):
         self.move_y = self.move_y + self.vel_y
         terrain = self.location.getTerrain(self)
+        if self.location.touchCeiling(self):
+            self.vel_y = Game.gravity
+            self.move_y = Game.gravity
         if terrain and self.vel_y >= 0:
             self.vel_y = 0
             self.move_y = 0

@@ -67,3 +67,11 @@ class Terrain(pygame.sprite.Sprite):
     
     def vertBoundry(self, character):
         return character.foot_pos > self.pos[1] and character.pos[1] < self.pos[1] + self.height
+    
+    def touchCeiling(self, character):
+        if self.bottom_clip == False:
+            return False
+        if self.inBoundry(character):
+            return self.pos[1] <= character.pos[1] <= self.pos[1] + self.height
+        return False
+    

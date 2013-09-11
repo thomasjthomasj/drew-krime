@@ -22,9 +22,6 @@ class Player(Character):
     control_melee = 3
     control_open = pygame.K_e
     
-    # Combat
-    weapon = False
-    
     # Level
     level_gun = 1
     level_melee = 1
@@ -103,7 +100,7 @@ class Player(Character):
     
     def mouseDown(self, button):
         if button == self.control_fire:
-            self.weapon.fire()
+            self.weapon.fire(pygame.mouse.get_pos())
 
     def mouseUp(self, button):
         if button == self.control_fire:

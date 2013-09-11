@@ -25,7 +25,7 @@ class BaseWeapon(object):
         self.setPos()
         self.reloaded_at = self.reload_time
     
-    def fire(self):
+    def fire(self, target):
         # Check ammo count,reload if out
         if self.ammo <= 0 and self.reloading == False:
             self.reload_ammo()
@@ -34,7 +34,7 @@ class BaseWeapon(object):
                 self.ammo = self.max_ammo
                 self.reloading = False
         if self.reloading == False:
-            self._fire()
+            self._fire(target)
             self.ammo = self.ammo - 1
         
     
@@ -58,10 +58,9 @@ class BaseWeapon(object):
         self.reloaded_at = pygame.time.get_ticks()
         self.reloading = True
         
-    def _fire(self):
+    def _fire(self, target):
         self.setPos()
-        mousePos = pygame.mouse.get_pos()
         bullet = self.bullet
-        bullet.move(mousePos, self.speed)
+        bullet.move(target, self.speed)
         Game.addSprite("bullets", bullet)
         

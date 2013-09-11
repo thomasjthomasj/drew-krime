@@ -6,11 +6,14 @@ from game.world.terrain.Wall import Wall
 from game.world.terrain.room.Room import Room
 from game.world.terrain.door.SideDoor import SideDoor
 from game.Game import Game
+from game.character.TestEnemy import TestEnemy
 
 class BaseLocation(object):
     
     player = False
     terrain = []
+    enemies = []
+    bullets = []
     
     @property
     def dimensions(self):
@@ -23,6 +26,7 @@ class BaseLocation(object):
     def __init__(self, player):
         self.player = player
         self.buildLevel()
+        self.setEnemies()
         
     def buildLevel(self):
         dimensions = Game.getDefaultDimensions()
@@ -32,6 +36,9 @@ class BaseLocation(object):
         room.buildFloor((255,255,255))
         room.buildWalls((255,0,0), (0,255,0))
         room.buildCeiling((0,0,255))
+    
+    def setEnemies(self):
+        enemy = TestEnemy(self, (100, self.dimensions[1] - 600))
         
     def againstTerrainLeft(self, character):
         for terrain in self.terrain:

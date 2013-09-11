@@ -19,6 +19,9 @@ class Character(Sprite):
     
     # Toggles
     sneak = False
+     
+    # Combat
+    weapon = False
     
     @property
     def foot_pos(self):

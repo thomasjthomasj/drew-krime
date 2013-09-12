@@ -6,7 +6,7 @@ class TestEnemy(Enemy):
     
     health = 5
     shot_fired = 0
-    rate_of_fire = 2000
+    rate_of_fire = 1000
     level_jump = 2
     level_jump_cap = 2
     
@@ -20,9 +20,10 @@ class TestEnemy(Enemy):
         screen.blit(self.image, self.pos)
         
     def attack(self):
-        if self.shot_fired > pygame.time.get_ticks() - self.rate_of_fire:
+        print(self.shot_fired, pygame.time.get_ticks() - self.rate_of_fire)
+        if self.shot_fired < pygame.time.get_ticks() - self.rate_of_fire:
             self.fire()
     
     def fire(self):
         self.shot_fired = pygame.time.get_ticks()
-        self.weapon.fire((self.centre_pos[0] + 800, self.pos[1]))
+        self.weapon.fire(self.location.player.centre_pos)

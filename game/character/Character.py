@@ -23,18 +23,6 @@ class Character(Sprite):
     # Combat
     weapon = False
     
-    @property
-    def foot_pos(self):
-        return self.pos[1] + self.src_height
-    
-    @property
-    def left_pos(self):
-        return self.pos[0] + self.width
-    
-    @property
-    def centre_pos(self):
-        return (self.pos[0] + self.width / 2, self.pos[1] + self.height / 2)
-    
     def __init__(self, src, pos):
         super(Character, self).__init__(src, pos)
         

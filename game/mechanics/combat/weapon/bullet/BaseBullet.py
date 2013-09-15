@@ -48,9 +48,9 @@ class BaseBullet(Sprite):
             self.render = False
             return
         
-        #if self.location.hitTerrain(self):
-        #    self.render = False
-        #    return
+        if self.location.hitTerrain(self):
+            self.render = False
+            return
         
         # Stolen from http://stackoverflow.com/questions/16288905/make-a-sprite-move-to-the-mouse-click-position-step-by-step/16294710#16294710
         target_vector = Vector.sub(self.target, self.pos)

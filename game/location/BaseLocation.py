@@ -40,15 +40,15 @@ class BaseLocation(object):
     def setEnemies(self):
         enemy = TestEnemy(self, (100, self.dimensions[1] - 600))
         
-    def againstTerrainLeft(self, character):
+    def againstTerrainLeft(self, sprite):
         for terrain in self.terrain:
-            if terrain.againstLeft(character):
+            if terrain.againstLeft(sprite):
                 return True
         return False
     
-    def againstTerrainRight(self, character):
+    def againstTerrainRight(self, sprite):
         for terrain in self.terrain:
-            if terrain.againstRight(character):
+            if terrain.againstRight(sprite):
                 return True
         return False
         
@@ -57,16 +57,16 @@ class BaseLocation(object):
             if isinstance(terrain, SideDoor):
                 terrain.toggleDoor(character)
         
-    def getTerrain(self, character):
+    def getTerrain(self, sprite):
         for terrain in self.terrain:
-            if terrain.onTerrain(character):
+            if terrain.onTerrain(sprite):
                 return terrain
         return False
     
-    def touchCeiling(self, character):
+    def touchCeiling(self, sprite):
         for terrain in self.terrain:
-            if terrain.touchCeiling(character):
-                character.pos[1] = terrain.pos[1] + terrain.height
+            if terrain.touchCeiling(sprite):
+                sprite.pos[1] = terrain.pos[1] + terrain.height
                 return True
         return False
     
@@ -74,8 +74,8 @@ class BaseLocation(object):
         for terrain in self.terrain:
             if terrain.touchCeiling(sprite):
                 return True
-            if terrain.onTerrain(sprite):
-                return True
+            #if terrain.onTerrain(sprite):
+            #    return True
             if terrain.againstRight(sprite):
                 return True
             if terrain.againstLeft(sprite):

@@ -10,13 +10,19 @@ class Sprite(pygame.sprite.Sprite):
     render = True
     width = 0
     height = 0
+        
+    @property
+    def base_pos(self):
+        return self.pos[1] + self.src_height
+    
+    @property
+    def left_pos(self):
+        return self.pos[0] + self.width
     
     @property
     def centre_pos(self):
-        x_pos = self.pos[0] + self.src_width / 2
-        y_pos = self.pos[1] + self.src_height / 2
-        return (x_pos, y_pos)
-    
+        return (self.pos[0] + self.width / 2, self.pos[1] + self.height / 2)
+
     def __init__(self, src, pos):
         super(Sprite, self).__init__()
         self.src_image = pygame.image.load(self.src_path + src).convert_alpha()

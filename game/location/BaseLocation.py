@@ -70,3 +70,14 @@ class BaseLocation(object):
                 return True
         return False
     
+    def hitTerrain(self, sprite):
+        for terrain in self.terrain:
+            if terrain.touchCeiling(sprite):
+                return True
+            if terrain.onTerrain(sprite):
+                return True
+            if terrain.againstRight(sprite):
+                return True
+            if terrain.againstLeft(sprite):
+                return True
+    

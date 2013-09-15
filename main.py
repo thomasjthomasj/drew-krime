@@ -8,8 +8,7 @@ import pygame
 
 # Check if Windows and import pygame._view if so
 from sys import platform as _platform
-#if _platform == "win32" or _platform == "cygwin":
-#    import pygame._view
+
 
 # Initialise pygame library
 pygame.init()
@@ -23,6 +22,7 @@ from game.world.Background import Background
 # Setup screen
 size = Game.getDefaultDimensions()
 screen = pygame.display.set_mode(size)
+fullscreen = False
 pygame.display.set_caption(project_title)
 
 screen.convert()
@@ -55,8 +55,15 @@ while inLoop:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 inLoop = False
+            elif event.key == pygame.K_F11 and fullscreen == False:
+                screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
+                fullscreen = True
+            elif event.key == pygame.K_F11 and fullscreen == True:
+                screen = pygame.display.set_mode(size)
+                fullscreen = False
             else:
                 player.keyDown(event.key)
+            
             
         elif event.type == pygame.KEYUP:
             player.keyUp(event.key)

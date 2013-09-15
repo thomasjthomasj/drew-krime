@@ -61,6 +61,8 @@ class BaseWeapon(object):
     def _fire(self, target):
         self.setPos()
         bullet = self.bullet
+        bullet.location = self.carrier.location
+        bullet.location.bullets.append(self)
         bullet.move(target, self.speed)
         Game.addSprite("bullets", bullet)
         

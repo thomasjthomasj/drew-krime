@@ -15,7 +15,7 @@ class Game:
     
     @staticmethod
     def getDefaultDimensions():
-        return [1000, 700]
+        return [1000, 750]
     
     @staticmethod
     def getDimensions():

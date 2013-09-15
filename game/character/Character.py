@@ -67,10 +67,12 @@ class Character(Sprite):
         if self.location.touchCeiling(self):
             self.vel_y = Game.gravity
             self.move_y = Game.gravity
+            self.pos[1] += self.move_y
         if terrain and self.vel_y >= 0:
             self.vel_y = 0
             self.move_y = 0
             self.pos[1] = terrain.pos[1] - self.src_height + 5
         else:
             self.vel_y += Game.gravity
+            self.pos[1] += self.move_y
     

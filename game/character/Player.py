@@ -72,7 +72,6 @@ class Player(Character):
             else:
                 self.moveX()
             
-            self.pos[1] += self.move_y
             screen.blit(self.image, self.pos)
         
     def keyDown(self, key):

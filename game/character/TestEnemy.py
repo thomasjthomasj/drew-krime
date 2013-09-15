@@ -20,7 +20,6 @@ class TestEnemy(Enemy):
         screen.blit(self.image, self.pos)
         
     def attack(self):
-        print(self.shot_fired, pygame.time.get_ticks() - self.rate_of_fire)
         if self.shot_fired < pygame.time.get_ticks() - self.rate_of_fire:
             self.fire()
     
